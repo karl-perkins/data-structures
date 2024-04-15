@@ -2,7 +2,8 @@ import HashMap from "./hashmap.js";
 
 const hashMap = new HashMap();
 
-console.log(hashMap.set('Karl', 'Hello World'));
-console.log(hashMap.set('Carlos', 'Hello World'));
-
-console.log(hashMap.buckets);
+hashMap.set('Karl', 'foo');
+console.log(hashMap.get('Karl'));
+hashMap.set('Karl', 'bar');
+console.log(hashMap.get('Karl'));
+console.log(hashMap.has('Karl'));

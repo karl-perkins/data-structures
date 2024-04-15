@@ -22,6 +22,36 @@ export default class HashMap {
       throw new Error('Trying to access index out of bound');
     }
 
-    this.buckets[index].append(value);
+    const foundNode = this.buckets[index].find(key);
+
+    if (foundNode !== null) {
+      this.buckets[index].find(key).value = value;
+    } else {
+      this.buckets[index].append(key, value);
+    }
+  }
+
+  get(key) {
+    const index = this.hash(key) % this.buckets.length;
+
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error('Trying to access index out of bound');
+    }
+
+    const foundNode = this.buckets[index].find(key);
+
+    return (foundNode !== null) ? foundNode.value : null;
+  }
+
+  has(key) {
+    const index = this.hash(key) % this.buckets.length;
+
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error('Trying to access index out of bound');
+    }
+
+    const foundNode = this.buckets[index].find(key);
+
+    return (foundNode !== null);
   }
 }
