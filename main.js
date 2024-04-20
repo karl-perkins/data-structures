@@ -17,4 +17,6 @@ linkedlist.append('Simon', 'bar');
 
 linkedlist.insertAt('Mike', 'baz', 1);
 
+linkedlist.removeAt(1);
+
 console.log(linkedlist.toString());

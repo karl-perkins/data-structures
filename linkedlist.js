@@ -175,20 +175,25 @@ export default class LinkedList {
   }
 
   removeAt(index) {
-    if (this.head === null) {
-      throw new Error('Index out of bounds');
+    if (index > this.size - 1) {
+      throw new Error('Index of of range');
     }
 
-    let currentIndex = 0;
+    let previousNode = null;
     let currentNode = this.head;
-    // let nextNode = null;
+    let currentIndex = 0;
 
-    while (currentIndex < index) {
-      currentIndex += 1;
-      currentNode = nextNode;
-      // nextNode = currentNode.next;
+    while (currentNode !== null && currentIndex < index) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+      currentIndex++;
     }
 
-    currentNode = currentNode.next;
+    if (previousNode === null) {
+      this.head = currentNode.next;
+    } else {
+      previousNode.next = currentNode.next;
+    }
+    this.size--;
   }
 }
