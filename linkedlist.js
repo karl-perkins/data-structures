@@ -1,7 +1,8 @@
-import Node from "./node.js";
+import Node from './node.js';
 
 export default class LinkedList {
   head = null;
+  size = 0;
 
   append(key, value) {
     if (this.head === null) {
@@ -15,6 +16,7 @@ export default class LinkedList {
 
       currentNode.next = new Node(key, value, null);
     }
+    this.size++;
   }
 
   prepend(key, value) {
@@ -23,22 +25,11 @@ export default class LinkedList {
     } else {
       this.head = new Node(key, value, this.head);
     }
+    this.size++;
   }
 
   size() {
-    if (this.head === null) {
-      return 0;
-    }
-
-    let count = 1;
-    let currentNode = this.head;
-
-    while (currentNode.next !== null) {
-      currentNode = currentNode.next;
-      count += 1;
-    }
-
-    return count;
+    return this.size;
   }
 
   head() {
@@ -94,11 +85,11 @@ export default class LinkedList {
     if (previousNode instanceof Node) {
       previousNode.next = null;
     } else {
-      this.head = null
+      this.head = null;
     }
-    
-    return currentNode;
 
+    this.size--;
+    return currentNode;
   }
 
   contains(key) {
@@ -158,24 +149,29 @@ export default class LinkedList {
   }
 
   insertAt(key, value, index) {
-    if (this.head === null) {
-      throw new Error('Index out of bounds');
-    }
-
-    let currentIndex = 0;
-    let previousNode = null;
+    let previousNodes = null;
     let currentNode = this.head;
 
-    while (currentIndex < index) {
-      if (currentNode.next === null) {
-        throw new Error('Index out of bounds');
+    for (let i = 0; i <= this.size - 1; i++) {
+      if (i === index) {
+        const newNode = new Node(key, value, currentNode);
+
+        if (previousNodes === null) {
+          previousNodes = newNode;
+        } else {
+          previousNodes.next = newNode;
+        }
+        this.head = previousNodes;
+        break;
       }
-      currentIndex += 1;
-      previousNode = currentNode;
+
+      if (previousNodes === null) {
+        previousNodes = currentNode;
+      } else {
+        previousNodes.next = currentNode;
+      }
       currentNode = currentNode.next;
     }
-
-    previousNode.next = new Node(key, value, currentNode);
   }
 
   removeAt(index) {
@@ -184,18 +180,15 @@ export default class LinkedList {
     }
 
     let currentIndex = 0;
-    let previousNode = null;
     let currentNode = this.head;
+    // let nextNode = null;
 
     while (currentIndex < index) {
-      if (currentNode.next === null) {
-        throw new Error('Index out of bounds');
-      }
       currentIndex += 1;
-      previousNode = currentNode;
-      currentNode = currentNode.next;
+      currentNode = nextNode;
+      // nextNode = currentNode.next;
     }
 
-    previousNode.next = currentNode.next;
+    currentNode = currentNode.next;
   }
 }

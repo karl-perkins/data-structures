@@ -54,4 +54,21 @@ export default class HashMap {
 
     return (foundNode !== null);
   }
+
+  remove(key) {
+    const index = this.hash(key) % this.buckets.length;
+
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error('Trying to access index out of bound');
+    }
+
+    const foundNodeIndex = this.buckets[index].findIndex(key);
+
+    if (foundNodeIndex !== null) {
+      this.buckets[index].removeAt(foundNodeIndex);
+      return true;
+    }
+
+    return false;
+  }
 }
