@@ -15,8 +15,8 @@ const linkedlist = new LinkedList();
 linkedlist.append('Karl', 'foo');
 linkedlist.append('Simon', 'bar');
 
-linkedlist.insertAt('Mike', 'baz', 1);
+linkedlist.insertAt('Mike', 'baz', 0);
 
-linkedlist.removeAt(1);
+// linkedlist.removeAt(1);
 
 console.log(linkedlist.toString());

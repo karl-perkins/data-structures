@@ -149,6 +149,10 @@ export default class LinkedList {
   }
 
   insertAt(key, value, index) {
+    if (index > this.size - 1) {
+      throw new Error('Index of of range');
+    }
+
     const newNode = new Node(key, value);
     let previousNode = null;
     let currentNode = this.head;
@@ -160,18 +164,14 @@ export default class LinkedList {
       currentIndex++;
     }
 
-    if (currentIndex === index) {
-      if (previousNode === null) {
-        newNode.next = this.head;
-        this.head = newNode;
-      } else {
-        previousNode.next = newNode;
-        newNode.next = currentNode;
-      }
-      this.size++;
+    if (previousNode === null) {
+      newNode.next = this.head;
+      this.head = newNode;
     } else {
-      throw new Error('Index of of range');
+      previousNode.next = newNode;
+      newNode.next = currentNode;
     }
+    this.size++;
   }
 
   removeAt(index) {
