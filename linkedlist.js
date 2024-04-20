@@ -149,28 +149,28 @@ export default class LinkedList {
   }
 
   insertAt(key, value, index) {
-    let previousNodes = null;
+    const newNode = new Node(key, value);
+    let previousNode = null;
     let currentNode = this.head;
+    let currentIndex = 0;
 
-    for (let i = 0; i <= this.size - 1; i++) {
-      if (i === index) {
-        const newNode = new Node(key, value, currentNode);
-
-        if (previousNodes === null) {
-          previousNodes = newNode;
-        } else {
-          previousNodes.next = newNode;
-        }
-        this.head = previousNodes;
-        break;
-      }
-
-      if (previousNodes === null) {
-        previousNodes = currentNode;
-      } else {
-        previousNodes.next = currentNode;
-      }
+    while (currentNode !== null && currentIndex < index) {
+      previousNode = currentNode;
       currentNode = currentNode.next;
+      currentIndex++;
+    }
+
+    if (currentIndex === index) {
+      if (previousNode === null) {
+        newNode.next = this.head;
+        this.head = newNode;
+      } else {
+        previousNode.next = newNode;
+        newNode.next = currentNode;
+      }
+      this.size++;
+    } else {
+      throw new Error('Index of of range');
     }
   }
 
