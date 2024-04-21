@@ -1,22 +1,14 @@
 import HashMap from "./hashmap.js";
-import LinkedList from "./linkedlist.js";
 
-// const hashMap = new HashMap();
+const hashMap = new HashMap();
 
-// hashMap.set('Karl', 'foo');
-// hashMap.set('Perkins', 'bar');
-// console.log(hashMap.buckets[0]);
+hashMap.set('Karl', 'foo');
+hashMap.set('Perkins', 'bar');
 
-// hashMap.remove('Karl');
-// console.log(hashMap.buckets[0]);
-// // console.log(hashMap.has('Karl'));
+console.log(hashMap.has('Karl'));
+console.log(hashMap.length);
 
-const linkedlist = new LinkedList();
-linkedlist.append('Karl', 'foo');
-linkedlist.append('Simon', 'bar');
+hashMap.remove('Karl');
 
-linkedlist.insertAt('Mike', 'baz', 0);
-
-// linkedlist.removeAt(1);
-
-console.log(linkedlist.toString());
+console.log(hashMap.has('Karl'));
+console.log(hashMap.length);

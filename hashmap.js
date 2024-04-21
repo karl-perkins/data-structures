@@ -2,6 +2,7 @@ import LinkedList from "./linkedlist.js";
 
 export default class HashMap {
   buckets = Array.from(Array(16), () => new LinkedList());
+  length = 0;
 
   hash(key) {
     let hashCode = 0;
@@ -29,6 +30,8 @@ export default class HashMap {
     } else {
       this.buckets[index].append(key, value);
     }
+
+    this.length++;
   }
 
   get(key) {
@@ -66,6 +69,7 @@ export default class HashMap {
 
     if (foundNodeIndex !== null) {
       this.buckets[index].removeAt(foundNodeIndex);
+      this.length--;
       return true;
     }
 
