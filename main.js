@@ -12,3 +12,6 @@ hashMap.remove('Karl');
 
 console.log(hashMap.has('Karl'));
 console.log(hashMap.length);
+
+hashMap.clear();
+console.log(hashMap.length);

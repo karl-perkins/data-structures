@@ -75,4 +75,9 @@ export default class HashMap {
 
     return false;
   }
+
+  clear() {
+    this.buckets = Array.from(Array(16), () => new LinkedList());
+    this.length = 0;
+  }
 }
